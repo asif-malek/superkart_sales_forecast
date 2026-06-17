@@ -10,26 +10,22 @@ model = joblib.load(model_path)
 # Streamlit UI
 st.title("SuperKart Sales Forecast")
 st.write("""
-This application predicts the expected **Sales Forecast** of a SuperKart application
-based on its characteristics such as Product Sugar Content, installs, active users, and screen time.
-Please enter the app details below to get a sales forecast prediction.
+This application predicts the expected **Sales Forecast** for a SuperKart product
+based on characteristics such as product weight, type, MRP, store size, and location.
+Please enter the details below to get a prediction.
 """)
 
 # User input
-Product_Weight = st.number_input("Product Weight", min_value=4, max_value=22, value=4, step=1)
+Product_Weight = st.number_input("Product Weight", min_value=0.004, max_value=0.298, value=0.004, step=0.001)
 Product_Sugar_Content = st.selectbox("Product Sugar Content", ["Low Sugar", "Regular", "No Sugar"])
 Product_Allocated_Area = st.number_input("Product Allocated Area", min_value=0.001, max_value=10.99, value=0.001, step=0.001)
 
 Product_Type = st.selectbox("Product Type", ["Household", "Starchy Foods", "Dairy", "Snack Foods", "Baking Goods", "Canned", "Frozen Foods", "Hard Drinks", "Meat", "Fruits and Vegetables", "Soft Drinks", "Others", "Health and Hygiene", "Breads", "Seafood", "Breakfast"])
-Product_MRP = st.number_input("Product MRP", min_value=0.1, max_value=9999, value=1, step=1)
+Product_MRP = st.number_input("Product MRP", min_value=0.1, max_value=9999.0, value=1.0, step=1.0)
 Store_Establishment_Year = st.number_input("Store Establishment Year", min_value=1900, max_value=2026, value=1900, step=1)
 Store_Size = st.selectbox("Store Size", ["High", "Medium", "Small"])
 Store_Location_City_Type = st.selectbox("Store City Type", ["Tier 1", "Tier 2", "Tier 3"])
 Store_Type = st.selectbox("Store Type", ["Departmental Store", "Supermarket Type1", "Supermarket Type2", "Food Mart"])
-
-
-
-
 
 # Assemble input into DataFrame
 input_data = pd.DataFrame([{
