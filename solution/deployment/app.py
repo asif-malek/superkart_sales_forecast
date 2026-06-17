@@ -4,7 +4,7 @@ from huggingface_hub import hf_hub_download
 import joblib
 
 # Download and load the trained model
-model_path = hf_hub_download(repo_id="asifaddicted/superkart-sales-forecast/sales_forecast_model", filename="best_sales_forecast_model_v1.joblib")
+model_path = hf_hub_download(repo_id="asifaddicted/superkart-sales-forecast-model", filename="best_sales_forecast_model_v1.joblib")
 model = joblib.load(model_path)
 
 # Streamlit UI
