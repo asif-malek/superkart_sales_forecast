@@ -7,6 +7,7 @@ from sklearn.pipeline import make_pipeline
 import xgboost as xgb
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+import numpy as np
 # for model serialization
 import joblib
 # for creating a folder
@@ -87,8 +88,8 @@ with mlflow.start_run():
     y_pred_test = best_model.predict(Xtest)
 
     # Metrics
-    train_rmse = mean_squared_error(ytrain, y_pred_train, squared=False)
-    test_rmse = mean_squared_error(ytest, y_pred_test, squared=False)
+    train_rmse = np.sqrt(mean_squared_error(ytrain, y_pred_train))
+    test_rmse = np.sqrt(mean_squared_error(ytest, y_pred_test))
 
     train_mae = mean_absolute_error(ytrain, y_pred_train)
     test_mae = mean_absolute_error(ytest, y_pred_test)
