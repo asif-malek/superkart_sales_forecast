@@ -16,9 +16,19 @@ Please enter the details below to get a prediction.
 """)
 
 # User input
-Product_Weight = st.number_input("Product Weight", min_value=0.004, max_value=0.298, value=0.004, step=0.001)
+Product_Weight = st.number_input("Product Weight", min_value=0.004, max_value=22.0, value=0.004, step=0.001)
 Product_Sugar_Content = st.selectbox("Product Sugar Content", ["Low Sugar", "Regular", "No Sugar"])
-Product_Allocated_Area = st.number_input("Product Allocated Area", min_value=0.001, max_value=10.99, value=0.001, step=0.001)
+Product_Allocated_Area_input = st.text_input("Product Allocated Area", value="", placeholder="Enter any decimal e.g. 0.027, 1.5, 10.99")
+
+if not Product_Allocated_Area_input.strip():
+    st.warning("Please enter a value for Product Allocated Area (e.g. 0.027)")
+    st.stop()
+
+try:
+    Product_Allocated_Area = round(float(Product_Allocated_Area_input.strip()), 10)
+except ValueError:
+    st.error("Please enter a valid number for Product Allocated Area (e.g. 0.027)")
+    st.stop()
 
 Product_Type = st.selectbox("Product Type", ["Household", "Starchy Foods", "Dairy", "Snack Foods", "Baking Goods", "Canned", "Frozen Foods", "Hard Drinks", "Meat", "Fruits and Vegetables", "Soft Drinks", "Others", "Health and Hygiene", "Breads", "Seafood", "Breakfast"])
 Product_MRP = st.number_input("Product MRP", min_value=0.1, max_value=9999.0, value=1.0, step=1.0)
@@ -39,6 +49,11 @@ input_data = pd.DataFrame([{
     'Store_Location_City_Type': Store_Location_City_Type,
     'Store_Type': Store_Type
 }])
+
+# Ensure float columns are not rounded
+input_data['Product_Allocated_Area'] = input_data['Product_Allocated_Area'].astype('float64')
+input_data['Product_Weight'] = input_data['Product_Weight'].astype('float64')
+input_data['Product_MRP'] = input_data['Product_MRP'].astype('float64')
 
 # Predict button
 if st.button("Predict Sales"):
