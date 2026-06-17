@@ -17,6 +17,8 @@ from huggingface_hub import login, HfApi, create_repo
 from huggingface_hub.utils import RepositoryNotFoundError, HfHubHTTPError
 import mlflow
 
+login(token=os.environ.get("HF_TOKEN"))
+
 mlflow.set_tracking_uri("http://localhost:5000")
 mlflow.set_experiment("mlops-training-experiment")
 
@@ -116,7 +118,7 @@ with mlflow.start_run():
     print(f"Model saved as artifact at: {model_path}")
 
     # Upload to Hugging Face
-    repo_id = "asifaddicted/superkart-sales-forecast"
+    repo_id = "asifaddicted/superkart-sales-forecast-model"  # separate model repo
     repo_type = "model"
 
     # Step 1: Check if the space exists
