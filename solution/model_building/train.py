@@ -21,10 +21,9 @@ mlflow.set_experiment("mlops-training-experiment")
 
 api = HfApi()
 
-
-Xtrain_path = "hf://datasets/asifaddicted/superkart-sales-forecast/play-store-revenue-analysis/Xtrain.csv"
-Xtest_path = "hf://datasets/asifaddicted/superkart-sales-forecast/play-store-revenue-analysis/Xtest.csv"
-ytrain_path = "hf://datasets/asifaddicted/superkart-sales-forecast/play-store-revenue-analysis/ytrain.csv"
+Xtrain_path = "hf://datasets/asifaddicted/superkart-sales-forecast/Xtrain.csv"
+Xtest_path = "hf://datasets/asifaddicted/superkart-sales-forecast/Xtest.csv"
+ytrain_path = "hf://datasets/asifaddicted/superkart-sales-forecast/ytrain.csv"
 ytest_path = "hf://datasets/asifaddicted/superkart-sales-forecast/ytest.csv"
 
 Xtrain = pd.read_csv(Xtrain_path)
